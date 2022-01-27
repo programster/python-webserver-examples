@@ -1,0 +1,1 @@
+docker build . --tag basic-python-webserver-example
