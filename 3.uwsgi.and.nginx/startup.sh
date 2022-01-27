@@ -12,4 +12,20 @@ NUM_WORKERS=$(expr $NUM_PROCS \* 2 + 1)
 # gunicorn this way
 cd /var/www/site
 
-uwsgi --workers $NUM_WORKERS --threads 2 --http :8080 --wsgi-file /var/www/site/app.py
+chown www-data:www-data --recursive /var/www
+
+touch /tmp/uwsgi.sock
+chown www-data:www-data /tmp/uwsgi.sock 
+chmod 660 /tmp/uwsgi.sock 
+
+uwsgi \
+  --uid=www-data \
+  --workers $NUM_WORKERS \
+  --threads 2 \
+  --socket /tmp/uwsgi.sock \
+  --wsgi-file /var/www/site/app.py &
+
+
+service nginx start
+
+cron -f

@@ -1,5 +1,3 @@
-# Using python 3.7 as libapache2-mod-wsgi-py3 currently
-# doesn't work with >=3.8
 FROM ubuntu:20.04
 
 # Fix timezone issue
@@ -23,7 +21,6 @@ COPY app.py /var/www/site/app.py
 RUN mkdir -p /var/www/site/public
 RUN chown -R root:www-data /var/www/site
 RUN chmod -R 0750 /var/www/site
-
 
 # Expose web port
 EXPOSE 8080

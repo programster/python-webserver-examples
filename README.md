@@ -30,13 +30,17 @@ It implements the webserver in python itself using http.server, which only
 implements basic security checks.
 
 
-### 2. uwsgi
+### 2. uWSGI
 Implements a webserver through the use of [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/).
 By default uWSGI does preforking, so your app is loaded one time, and then
 forked.
 
+### 3. uWSGI & Nginx
+This is the same as uWSGI, but with an nginx proxy in front.
+**Unfortunately, this is still a work in progress and is not working yet.**
 
-### 3. gunicorn
+
+### 4. gunicorn
 Implements a webserver through [gunicorn](https://gunicorn.org/).
 
 #### Number of Workers
@@ -47,7 +51,7 @@ thousands of requests per second. They recommend setting `(2 x $num_cores) + 1`
 workers.
 
 
-### 4. Gunicorn & Nginx
+### 5. Gunicorn & Nginx
 This example is like the previous example, but we use Nginx as a proxy.
 This is strongly recommended by 
 [the gunicorn deployment docs](https://docs.gunicorn.org/en/stable/deploy.html).

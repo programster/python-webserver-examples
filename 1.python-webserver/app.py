@@ -2,6 +2,8 @@
 # Courtesy of https://pythonbasics.org/webserver/
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
+import random
+import decimal
 
 hostName = ""
 serverPort = 8080
@@ -9,8 +11,13 @@ serverPort = 8080
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
         
-        # Sleep for half a second to simulate fetching data from database etc.
-        time.sleep(0.5)
+        # Sleep for a random amount of time between 0 and 0.5 seconds to
+        # simulate fetching data from database or an external API.
+        time.sleep(float(decimal.Decimal(random.randrange(0, 50))/100))
+
+        # Simulate some "work"
+        #for i in range(1000000):
+        #    print("Hello")
         
         self.send_response(200)
         self.send_header("Content-type", "text/html")
